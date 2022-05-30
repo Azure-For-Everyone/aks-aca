@@ -28,11 +28,12 @@ az containerapp env create -n azureforeveryone-production -g azureforeveru_group
 
 ## Create container app
 az containerapp create -n aks-aca-demo -g azureforeveru_group --environment azureforeveryone-develop --ingress external --target-port 80 --registry-server aksacademo.azurecr.io --registry-username myusername --registry-password xxx --query properties.configuration.ingress.fqdn 
+az containerapp update -n aks-aca-demo -g azureforeveru_group --image aksacademo.azurecr.io/aks-aca:1.0.0
 az containerapp update -n aks-aca-demo -g azureforeveru_group --image aksacademo.azurecr.io/aks-aca:1.2.0
 
 ## Create container up quickly
 az extension add --name containerapp --upgrade
-az containerapp up --name play-tetris -g azureforeveru_group --repo https://github.com/cedricve/TetrisContainer --registry-server aksacademo.azurecr.io --registry-username myusername --registry-password xxx
+az containerapp up --name play-tetris -g azureforeveru_group --repo https://github.com/Azure-For-Everyone/TetrisContainer --registry-server aksacademo.azurecr.io --registry-username myusername --registry-password xxx
 
 ## Delete container app
 
