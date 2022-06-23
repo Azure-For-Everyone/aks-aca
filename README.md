@@ -52,7 +52,7 @@ Create a cluster in resource group **azureforeveru_group** and with a ACR **aksa
 ## Create container up quickly
 
     az extension add --name containerapp --upgrade
-    az containerapp up --name play-tetris -g azureforeveru_group --repo https://github.com/Azure-For-Everyone/TetrisContainer --registry-server aksacademo.azurecr.io --registry-username myusername --registry-password xxx
+    az containerapp up --name play-tetris -g azureforeveru_group --repo https://github.com/Azure-For-Everyone/TetrisContainer --registry-server aksacademo.azurecr.io --registry-username mytoken --registry-password xxx
 
 ## Delete container app
 
