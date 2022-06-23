@@ -46,6 +46,9 @@ Create a cluster in resource group **azureforeveru_group** and with a ACR **aksa
 ## Updating the container app
     
     az containerapp update -n aks-aca-demo -g azureforeveru_group --image aksacademo.azurecr.io/aks-aca:1.0.0
+    
+### Make sure to change revision mode to multi
+
     az containerapp update -n aks-aca-demo -g azureforeveru_group --image aksacademo.azurecr.io/aks-aca:1.2.0
 
 ## Create container up quickly
