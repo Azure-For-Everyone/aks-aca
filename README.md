@@ -18,6 +18,17 @@ Create a cluster in resource group **azureforeveru_group** and with a ACR **aksa
 
     az group create -l westeurope -n azureforeveru_group
 
+## Create a container registry
+
+    az acr create --resource-group azureforeveru_group --name aksacademo --sku Premium
+
+## Building for ACR
+
+    az acr login --name aksacademo
+    az acr list --resource-group azureforeveru_group --query "[].{acrLoginServer:loginServer}" --output table
+    docker buildx build --platform linux/amd64 --push -t aksacademo.azurecr.io/aks-aca:1.0.0 .
+    docker buildx build --platform linux/amd64 --push -t aksacademo.azurecr.io/aks-aca:1.2.0 .
+    
 ## Create log workspace
 
     az monitor log-analytics workspace create -g azureforeveru_group -n logworkspace
@@ -28,21 +39,9 @@ Create a cluster in resource group **azureforeveru_group** and with a ACR **aksa
     az containerapp env create -n azureforeveryone-staging -g azureforeveru_group -l westeurope --logs-workspace-id 022c9856-b18b-4a7c-b183-7841ff3a1df0
     az containerapp env create -n azureforeveryone-production -g azureforeveru_group -l westeurope --logs-workspace-id 022c9856-b18b-4a7c-b183-7841ff3a1df0
 
-## Create a container registry
-
-    az acr create --resource-group azureforeveru_group --name aksacademo --sku Premium
-    
 ## Create container app
 
     az containerapp create -n aks-aca-demo -g azureforeveru_group --environment azureforeveryone-develop --ingress external --target-port 80 --registry-server aksacademo.azurecr.io --registry-username mytoken --registry-password xxx --query properties.configuration.ingress.fqdn 
-    
-
-## Building for ACR
-
-    az acr login --name aksacademo
-    az acr list --resource-group azureforeveru_group --query "[].{acrLoginServer:loginServer}" --output table
-    docker buildx build --platform linux/amd64 --push -t aksacademo.azurecr.io/aks-aca:1.0.0 .
-    docker buildx build --platform linux/amd64 --push -t aksacademo.azurecr.io/aks-aca:1.2.0 .
     
 ## Updating the container app
     
