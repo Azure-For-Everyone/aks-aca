@@ -20,6 +20,8 @@ Create a cluster in resource group **azureforeveru_group** and with a ACR **aksa
 
 ## Create a container registry
 
+Create a new Azure Container Registry. Once done make sure to go to tokens and generate a new pair of tokens for authentication.
+
     az acr create --resource-group azureforeveru_group --name aksacademo --sku Premium
 
 ## Building for ACR
